@@ -10,74 +10,35 @@
 <body>
 @php
 
-Class ValueObject {
-    private $red;
-    private $green;
-    private $blue;
+use App\Models\Currency;
+use App\Models\Money;
 
-    public function __construct($red,$green,$blue) {
-        $this->setRed($red);
-        $this->setGreen($green);
-        $this->setBlue($blue);
-    }
+$firstCurrency = new Currency('UAH');
+$secondCurrency = new Currency('USD');
+$thirdCurrency = new Currency('USD');
 
-    private function trueValue($color) {
-        if ($color < 0 || $color > 255) {
-            throw new Exception("Invalid value");
-        }
-        return $color;
-    }
+echo $firstCurrency->equals($secondCurrency). '<br>';
+echo $secondCurrency->equals($thirdCurrency). '<hr>';
 
-    public function getRed() {
-        return $this->red;
-    }
-    private function setRed($red) {
-        $this->red = $this->trueValue($red);
-    }
 
-    public function getGreen() {
-        return $this->green;
-    }
-    private function setGreen($green) {
-        $this->green = $this->trueValue($green);
-    }
+$firstMoney = new Money(200, 'USD');
+$secondMoney = new Money(10000.5, 'UAH');
+$thirdMoney = new Money(8000, 'UAH');
+$fourthMoney = new Money(200, 'USD');
 
-    public function getBlue() {
-        return $this->blue;
-    }
-    private function setBlue($blue) {
-        $this->blue = $this->trueValue($blue);
-    }
+echo "We have ".$firstMoney->getAmount()." ". $firstMoney->getCurrency(). "<br>";
+echo "We have ".$secondMoney->getAmount()." ". $secondMoney->getCurrency(). "<br>";
+echo "We have ".$thirdMoney->getAmount()." ". $thirdMoney->getCurrency(). "<br>";
+echo "We have ".$fourthMoney->getAmount()." ". $fourthMoney->getCurrency(). "<hr>";
 
-    public function equals(ValueObject $valueObject) {
-        if ($this->red == $valueObject->getRed() && $this->green == $valueObject->getGreen() && $this->blue == $valueObject->getBlue()){
-            return "The colors are the same";
-        } else {
-            return "The colors are different";
-        }
-    }
+echo $firstMoney->equals($secondMoney). "<br>";
+echo $secondMoney->equals($thirdMoney). "<br>";
+echo $thirdMoney->equals($fourthMoney). "<br>";
+echo $fourthMoney->equals($firstMoney). "<hr>";
 
-    static function random() {
-        return new ValueObject(rand(0, 255), rand(0, 255), rand(0,255));
-    }
-
-    public function mix(ValueObject $valueObject) {
-        return new ValueObject(
-            $this->red = (($this->getRed() + $valueObject->getRed()) / 2),
-            $this->green = (($this->getGreen() + $valueObject->getGreen()) / 2),
-            $this->blue = (($this->getBlue() + $valueObject->getBlue()) / 2)
-        );
-    }
-}
-
-$objectFirst = new ValueObject(100, 150, 200);
-$objectSecond = new ValueObject(50, 75, 100);
-
-echo $objectFirst->equals($objectSecond)."<hr>";
-
-var_dump(ValueObject::random());
-
-var_dump($objectFirst->mix(ValueObject::random()));
+//"<pre>". var_dump($firstMoney->add($secondMoney)). "</pre>";
+"<pre>". var_dump($secondMoney->add($thirdMoney)). "</pre>";
+"<pre>". var_dump($firstMoney->add($fourthMoney)). "</pre>";
 
 @endphp
 </body>
