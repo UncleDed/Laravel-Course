@@ -10,35 +10,25 @@
 <body>
 @php
 
-use App\Models\Currency;
-use App\Models\Money;
+use App\Models\UserHillel as User;
 
-$firstCurrency = new Currency('UAH');
-$secondCurrency = new Currency('USD');
-$thirdCurrency = new Currency('USD');
+$user = User::find(1);
+var_dump($user); // SELECT * FROM user WHERE id = :id
 
-echo $firstCurrency->equals($secondCurrency). '<br>';
-echo $secondCurrency->equals($thirdCurrency). '<hr>';
+$user = new User();
+$user->id = 1;
+$user->name = 'John';
+$result = $user->save();
+var_dump($result); // UPDATE user SET name = :name, email = 'email' WHERE id = :id
 
+$result = $user->delete();
+var_dump($result); // DELETE FROM user WHERE id = :id
 
-$firstMoney = new Money(200, 'USD');
-$secondMoney = new Money(10000.5, 'UAH');
-$thirdMoney = new Money(8000, 'UAH');
-$fourthMoney = new Money(200, 'USD');
-
-echo "We have ".$firstMoney->getAmount()." ". $firstMoney->getCurrency(). "<br>";
-echo "We have ".$secondMoney->getAmount()." ". $secondMoney->getCurrency(). "<br>";
-echo "We have ".$thirdMoney->getAmount()." ". $thirdMoney->getCurrency(). "<br>";
-echo "We have ".$fourthMoney->getAmount()." ". $fourthMoney->getCurrency(). "<hr>";
-
-echo $firstMoney->equals($secondMoney). "<br>";
-echo $secondMoney->equals($thirdMoney). "<br>";
-echo $thirdMoney->equals($fourthMoney). "<br>";
-echo $fourthMoney->equals($firstMoney). "<hr>";
-
-//"<pre>". var_dump($firstMoney->add($secondMoney)). "</pre>";
-"<pre>". var_dump($secondMoney->add($thirdMoney)). "</pre>";
-"<pre>". var_dump($firstMoney->add($fourthMoney)). "</pre>";
+$user = new User;
+$user->name = 'John';
+$user->email = 'some@gmail.com';
+$result = $user->save();
+var_dump($result); // INSERT INTO user (id, name, email) VALUES (:id, :name, :email)
 
 @endphp
 </body>
