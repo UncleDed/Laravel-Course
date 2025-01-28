@@ -10,25 +10,63 @@
 <body>
 @php
 
-use App\Models\UserHillel as User;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Tag;
 
-$user = User::find(1);
-var_dump($user); // SELECT * FROM user WHERE id = :id
+//for ($i = 1; $i <= 5; $i++){
+//    $category = new Category();
+//    $category->title = "Horror";
+//    $category->slug = "Horror #". $i;
+//    $category->save();
+//}
 
-$user = new User();
-$user->id = 1;
-$user->name = 'John';
-$result = $user->save();
-var_dump($result); // UPDATE user SET name = :name, email = 'email' WHERE id = :id
 
-$result = $user->delete();
-var_dump($result); // DELETE FROM user WHERE id = :id
+//$updateCategory = Category::orderBy('id', 'asc')->first();
+//$updateCategory->title = "Horror First";
+//$updateCategory->save();
 
-$user = new User;
-$user->name = 'John';
-$user->email = 'some@gmail.com';
-$result = $user->save();
-var_dump($result); // INSERT INTO user (id, name, email) VALUES (:id, :name, :email)
+
+//$deleteLastCat = Category::orderBy('id', 'desc')->first();
+//$deleteLastCat->delete();
+
+
+//for ($i = 1; $i <= 10; $i++){
+//    $post = new Post();
+//    $post->title = "Comment";
+//    $post->slug = "Comment #". $i;
+//    $post->body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+//    $post->category_id = 12;
+//    $post->save();
+//}
+
+
+//$updatePost = Post::orderBy('id', 'asc')->first();
+//$updatePost->title = "Updated comment";
+//$updatePost->slug = "Updated comment";
+//$updatePost->body = "Ut enim ad minim veniam, quis nostrud exercitation.";
+//$updatePost->category_id = 13;
+//$updatePost->save();
+
+
+//$deleteLastPost = Post::orderBy('id', 'desc')->first();
+//$deleteLastPost->delete();
+
+
+//for ($i = 1; $i <= 10; $i++){
+//    $tag = new Tag();
+//    $tag->title = "Tag";
+//    $tag->slug = "Tag #". $i;
+//    $tag->save();
+//}
+
+
+//$posts = Post::all();
+//foreach ($posts as $post){
+//    $post->tags()->sync(
+//        array_map(fn() => rand(1, 10), range(1, 3))
+//    );
+//}
 
 @endphp
 </body>
